@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Auction System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="auction-container">
+        <h1>Online Auction System</h1>
+        <div class="item">
+            <img src="item.jpg" alt="Auction Item" class="item-image">
+            <div class="item-details">
+                <h2>Polaroid One-Step 600 Instant Camera</h2>
+                <p>Starting Price: $100</p>
+                <p id="highest-bid">Current Highest Bid: $150</p>
+                <p>End Time: October 20, 2024, 6:00 PM</p>
+            </div>
+        </div>
+        <form class="bid-form" id="bid-form">
+            <label for="bid-amount">Place Your Bid:</label>
+            <input type="number" id="bid-amount" name="bid-amount" min="151" placeholder="Enter your bid" required>
+            <button type="submit">Submit Bid</button>
+        </form>
+        <div class="bid-message">
+            <p>Note: The highest bidder at the end of the auction will win the item.</p>
+        </div>
+    </div>
+
+    <script>
+        // Get elements
+        const bidForm = document.getElementById('bid-form');
+        const highestBidElement = document.getElementById('highest-bid');
+        let currentHighestBid = 150; // Set the initial highest bid
+
+        // Handle form submission
+        bidForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from reloading the page
+
+            // Get the user's bid
+            const userBid = parseInt(document.getElementById('bid-amount').value);
+
+            // Check if the user's bid is higher than the current highest bid
+            if (userBid > currentHighestBid) {
+                // Update the highest bid
+                currentHighestBid = userBid;
+                highestBidElement.textContent = `Current Highest Bid: $${currentHighestBid}`;
+
+                // Optionally, you can display a message to the user
+                alert('Your bid has been submitted successfully!');
+            } else {
+                // If bid is not high enough, show an error message
+                alert('Your bid must be higher than the current highest bid.');
+            }
+        });
+    </script>
+</body>
+</html>
